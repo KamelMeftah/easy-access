@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary" id="start">
+    <ion-searchbar [(ngModel)]="autocomplete.input_1" (ionInput)="updateSearchResults_1()" placeholder="Départ"></ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar color="primary" id="end">
+    <ion-searchbar [(ngModel)]="autocomplete.input_2" (ionInput)="updateSearchResults_2()" placeholder="Arrivée"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list [hidden]="autocompleteItems_1.length == 0">
+    <ion-item *ngFor="let item of autocompleteItems_1" tappable (click)="selectSearchResult_1(item)">
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+  <ion-list [hidden]="autocompleteItems_2.length == 0">
+    <ion-item *ngFor="let item of autocompleteItems_2" tappable (click)="selectSearchResult_2(item)">
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+  <button class="route-btn" ion-button full (click)="calculateAndDisplayRoute()">Démarrer mon itinéraire</button>
+  <div #map id='map'></div>
+</ion-content>
+
+<ion-footer>
+  <button class="geolocation-btn" ion-button full (click)="tryGeolocation()"> Géolocalisation </button>
+</ion-footer>
